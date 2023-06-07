@@ -1,9 +1,15 @@
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent } from "#imports";
+import { useI18n } from "vue-i18n";
 
 export default defineComponent({
+  setup() {
+    const { t } = useI18n();
+    return { t };
+  },
   mounted() {
-    this.$accessor.setEmail("mounted");
+    this.$accessor.setEmail("mounted@gmail.com");
+    this.$accessor.resetEmail();
   },
   computed: {
     email() {
@@ -14,5 +20,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <main>{{ $accessor.email }}</main>
+  <div>email: {{ $accessor.email }}</div>
+  <div>i18n: {{ $t("hoge") }}</div>
+  <div>useI18n: {{ t("hoge") }}</div>
 </template>
