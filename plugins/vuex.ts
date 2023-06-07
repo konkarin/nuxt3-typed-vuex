@@ -1,4 +1,4 @@
-import { defineNuxtPlugin, Plugin } from "#app";
+import { defineNuxtPlugin } from "#app";
 import { createStore } from "vuex";
 import { useAccessor, getterTree, mutationTree, actionTree } from "typed-vuex";
 
@@ -14,10 +14,6 @@ const getters = getterTree(state, {
 const mutations = mutationTree(state, {
   setEmail(state, newValue: string) {
     state.email = newValue;
-  },
-
-  initialiseStore() {
-    console.log("initialised");
   },
 });
 
@@ -42,7 +38,7 @@ const store = createStore(storePattern);
 
 export const accessor = useAccessor(store, storePattern);
 
-const plugin: Plugin = defineNuxtPlugin((nuxtApp) => {
+const plugin = defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.use(store);
   nuxtApp.vueApp.config.globalProperties.$accessor = accessor;
 
